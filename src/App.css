@@ -1,5 +1,16 @@
 .App {
   text-align: center;
+  margin-top: 20%;
+  
+
+}
+
+.main{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-evenly;
+  
 }
 
 .App-logo {
@@ -19,14 +30,41 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
+  justify-content: space-between;
   font-size: calc(10px + 2vmin);
   color: white;
+  
 }
 
 .App-link {
   color: #61dafb;
 }
+
+.boxbutton {
+  width: 50px;
+  height: 50px;
+  margin: 0;
+  padding: 0;
+}
+
+.boxbutton:disabled{
+  color: black;
+  background-color: lightgray; 
+}
+
+.toggleButton{
+  display: flex;
+  flex-direction: column;
+  
+}
+
+.buttonIndex{
+  margin: 5%;
+  width: 90px;
+  height: 25px;
+}
+
+
 
 @keyframes App-logo-spin {
   from {
