@@ -17,22 +17,22 @@ function App() {
 
   // console.log(gameHistory)
 
-  function checkWinner() {
+  function checkWinner(valuesAtBox) {
     function checkLine  (a, b, c)  {
       return a !== '\u00A0' && a === b && b === c ;
     };
     for (let i = 0; i < 3; i++) {
-      if (checkLine(valuesAtBoxes[i][0], valuesAtBoxes[i][1], valuesAtBoxes[i][2])) {
+      if (checkLine(valuesAtBox[i][0], valuesAtBox[i][1], valuesAtBox[i][2])) {
         // console.log("win");
         return true;
       }
-      if (checkLine(valuesAtBoxes[0][i], valuesAtBoxes[1][i], valuesAtBoxes[2][i])) {
+      if (checkLine(valuesAtBox[0][i], valuesAtBox[1][i], valuesAtBox[2][i])) {
         // console.log("win");
         return true;
       }
     }
-    if (checkLine(valuesAtBoxes[0][0], valuesAtBoxes[1][1], valuesAtBoxes[2][2]) ||
-        checkLine(valuesAtBoxes[0][2], valuesAtBoxes[1][1], valuesAtBoxes[2][0])) {
+    if (checkLine(valuesAtBox[0][0], valuesAtBox[1][1], valuesAtBox[2][2]) ||
+        checkLine(valuesAtBox[0][2], valuesAtBox[1][1], valuesAtBox[2][0])) {
       // console.log("win");
       return true;
     }
@@ -56,8 +56,8 @@ function App() {
       setGameHistory([...deepCopiedGameHistory, changesAtBoxes]);
 
       // console.log(gameHistory)
-      if(checkWinner()){
-        setGameStatus(true)
+      if(checkWinner(changesAtBoxes)){
+        setGameStatus(true);
         return;
       }
       setCurrentPlayer(currentPlayer === "O" ? "X" : "O");
@@ -65,12 +65,17 @@ function App() {
   }
 
   function toggleToParticularStep(index){
-    // console.log(index);
+    
     // if(index!=gameHistory.length-1){
     setValuesAtBoxes(gameHistory[index]);
     setGameStatus(false);
-    if(!checkWinner())
+    if(!checkWinner(gameHistory[index])){
     setChangeGameMovement([true,index]);
+    setCurrentPlayer((index+1)%2 !== 0 ? "O" : "X")
+  }
+  else{
+    setGameStatus(true)
+  }
     // }
 
   }
