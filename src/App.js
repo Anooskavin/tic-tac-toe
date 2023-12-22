@@ -1,6 +1,32 @@
 
-import './App.css';
+import "./App.css";
+
 import { useEffect, useState } from 'react';
+
+
+export function checkWinner(valuesAtBox) {
+  function checkLine  (a, b, c)  {
+    return a !== '\u00A0' && a === b && b === c ;
+  };
+  for (let i = 0; i < 3; i++) {
+    if (checkLine(valuesAtBox[i][0], valuesAtBox[i][1], valuesAtBox[i][2])) {
+      console.log(valuesAtBox[i][0], valuesAtBox[i][1], valuesAtBox[i][2]);
+      return true;
+    }
+    if (checkLine(valuesAtBox[0][i], valuesAtBox[1][i], valuesAtBox[2][i])) {
+      // console.log("win2");
+      return true;
+    }
+  }
+  if (checkLine(valuesAtBox[0][0], valuesAtBox[1][1], valuesAtBox[2][2]) ||
+      checkLine(valuesAtBox[0][2], valuesAtBox[1][1], valuesAtBox[2][0])) {
+    // console.log("win3");
+    return true;
+  }
+  // console.log("loss");
+  return false;
+}
+
 
 
 function App() {
@@ -17,27 +43,7 @@ function App() {
 
   // console.log(gameHistory)
 
-  function checkWinner(valuesAtBox) {
-    function checkLine  (a, b, c)  {
-      return a !== '\u00A0' && a === b && b === c ;
-    };
-    for (let i = 0; i < 3; i++) {
-      if (checkLine(valuesAtBox[i][0], valuesAtBox[i][1], valuesAtBox[i][2])) {
-        // console.log("win");
-        return true;
-      }
-      if (checkLine(valuesAtBox[0][i], valuesAtBox[1][i], valuesAtBox[2][i])) {
-        // console.log("win");
-        return true;
-      }
-    }
-    if (checkLine(valuesAtBox[0][0], valuesAtBox[1][1], valuesAtBox[2][2]) ||
-        checkLine(valuesAtBox[0][2], valuesAtBox[1][1], valuesAtBox[2][0])) {
-      // console.log("win");
-      return true;
-    }
-    return false;
-  }
+  
   
   
   function handleChangeValues(firstIndex,secondIndex){
